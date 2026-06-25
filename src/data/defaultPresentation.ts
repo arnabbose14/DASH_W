@@ -2342,7 +2342,7 @@ export const defaultPresentation: Presentation = {
                 "width": "fill",
                 "height": "fill",
                 "gap": "2cqmin",
-                "alignItems": "center"
+                "alignItems": "stretch"
               },
               "dataBindings": {},
               "localProps": {
@@ -2354,40 +2354,97 @@ export const defaultPresentation: Presentation = {
               },
               "children": [
                 {
-                  "id": "irr_vertical_chart",
-                  "type": "bar-chart",
-                  "dataBindings": {},
+                  "id": "irr_card_stack",
+                  "type": "stack",
                   "layout": {
                     "width": "fill",
-                    "height": "fill"
+                    "height": "fill",
+                    "direction": "column"
                   },
                   "localProps": {
-                    "data": [
-                      {
-                        "label": "Series I",
-                        "value": 26.8,
-                        "highlight": false
+                    "style": {
+                      "background": "rgba(201, 168, 76, 0.02)",
+                      "border": "1px solid rgba(201, 168, 76, 0.12)",
+                      "borderRadius": "16px",
+                      "overflow": "hidden",
+                      "boxSizing": "border-box"
+                    }
+                  },
+                  "dataBindings": {},
+                  "children": [
+                    {
+                      "id": "irr_card_spacer",
+                      "type": "headline",
+                      "dataBindings": {},
+                      "layout": {
+                        "width": "fill",
+                        "height": "fit"
                       },
-                      {
-                        "label": "Series II",
-                        "value": 18,
-                        "highlight": false
-                      },
-                      {
-                        "label": "Series III",
-                        "value": 27.5,
-                        "highlight": false
-                      },
-                      {
-                        "label": "Series IV",
-                        "value": 27.7,
-                        "highlight": true
+                      "localProps": {
+                        "tag": "div",
+                        "text": "Gross MOIC",
+                        "style": {
+                          "color": "transparent",
+                          "fontWeight": "bold",
+                          "fontSize": "1.35cqmin",
+                          "textAlign": "center",
+                          "padding": "1.2cqmin 0",
+                          "width": "100%",
+                          "letterSpacing": "0.05em",
+                          "userSelect": "none"
+                        }
                       }
-                    ],
-                    "unit": "%",
-                    "maxValue": 35,
-                    "layoutType": "vertical"
-                  }
+                    },
+                    {
+                      "id": "irr_chart_container",
+                      "type": "stack",
+                      "layout": {
+                        "width": "fill",
+                        "height": "fill",
+                        "direction": "column",
+                        "padding": "2.5cqmin"
+                      },
+                      "dataBindings": {},
+                      "children": [
+                        {
+                          "id": "irr_vertical_chart",
+                          "type": "bar-chart",
+                          "dataBindings": {},
+                          "layout": {
+                            "width": "fill",
+                            "height": "fill"
+                          },
+                          "localProps": {
+                            "data": [
+                              {
+                                "label": "Series I",
+                                "value": 26.8,
+                                "highlight": false
+                              },
+                              {
+                                "label": "Series II",
+                                "value": 18,
+                                "highlight": false
+                              },
+                              {
+                                "label": "Series III",
+                                "value": 27.5,
+                                "highlight": false
+                              },
+                              {
+                                "label": "Series IV",
+                                "value": 27.7,
+                                "highlight": true
+                              }
+                            ],
+                            "unit": "%",
+                            "maxValue": 35,
+                            "layoutType": "vertical"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "id": "moic_connector",
@@ -2395,7 +2452,7 @@ export const defaultPresentation: Presentation = {
                   "dataBindings": {},
                   "layout": {
                     "width": "fill",
-                    "height": "fit"
+                    "height": "fill"
                   },
                   "localProps": {
                     "tag": "div",
@@ -2404,45 +2461,106 @@ export const defaultPresentation: Presentation = {
                       "fontSize": "36px",
                       "color": "var(--gold)",
                       "textAlign": "center",
-                      "fontWeight": "bold"
+                      "fontWeight": "bold",
+                      "height": "100%",
+                      "display": "flex",
+                      "alignItems": "center",
+                      "justifyContent": "center"
                     }
                   }
                 },
                 {
-                  "id": "moic_vertical_chart",
-                  "type": "bar-chart",
-                  "dataBindings": {},
+                  "id": "moic_card_stack",
+                  "type": "stack",
                   "layout": {
                     "width": "fill",
-                    "height": "fill"
+                    "height": "fill",
+                    "direction": "column"
                   },
                   "localProps": {
-                    "data": [
-                      {
-                        "label": "Fund I (Fully Exited)",
-                        "value": 6,
-                        "highlight": true
+                    "style": {
+                      "background": "rgba(201, 168, 76, 0.02)",
+                      "border": "1px solid rgba(201, 168, 76, 0.12)",
+                      "borderRadius": "16px",
+                      "overflow": "hidden",
+                      "boxSizing": "border-box"
+                    }
+                  },
+                  "dataBindings": {},
+                  "children": [
+                    {
+                      "id": "moic_card_header",
+                      "type": "headline",
+                      "dataBindings": {},
+                      "layout": {
+                        "width": "fill",
+                        "height": "fit"
                       },
-                      {
-                        "label": "Fund II (Partial Exit)",
-                        "value": 4,
-                        "highlight": false
-                      },
-                      {
-                        "label": "Fund III (Ongoing)",
-                        "value": 3.7,
-                        "highlight": false
-                      },
-                      {
-                        "label": "Fund IV (Ongoing)",
-                        "value": 1.5,
-                        "highlight": false
+                      "localProps": {
+                        "tag": "div",
+                        "text": "Gross MOIC",
+                        "style": {
+                          "background": "#000000",
+                          "color": "#FFFFFF",
+                          "fontWeight": "bold",
+                          "fontSize": "1.35cqmin",
+                          "textAlign": "center",
+                          "padding": "1.2cqmin 0",
+                          "width": "100%",
+                          "letterSpacing": "0.05em"
+                        }
                       }
-                    ],
-                    "unit": "x",
-                    "maxValue": 8,
-                    "layoutType": "vertical"
-                  }
+                    },
+                    {
+                      "id": "moic_chart_container",
+                      "type": "stack",
+                      "layout": {
+                        "width": "fill",
+                        "height": "fill",
+                        "direction": "column",
+                        "padding": "2.5cqmin"
+                      },
+                      "dataBindings": {},
+                      "children": [
+                        {
+                          "id": "moic_vertical_chart",
+                          "type": "bar-chart",
+                          "dataBindings": {},
+                          "layout": {
+                            "width": "fill",
+                            "height": "fill"
+                          },
+                          "localProps": {
+                            "data": [
+                              {
+                                "label": "Fund I (Fully Exited)",
+                                "value": 6,
+                                "highlight": true
+                              },
+                              {
+                                "label": "Fund II (Partial Exit)",
+                                "value": 4,
+                                "highlight": false
+                              },
+                              {
+                                "label": "Fund III (Ongoing)",
+                                "value": 3.7,
+                                "highlight": false
+                              },
+                              {
+                                "label": "Fund IV (Ongoing)",
+                                "value": 1.5,
+                                "highlight": false
+                              }
+                            ],
+                            "unit": "x",
+                            "maxValue": 8,
+                            "layoutType": "vertical"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },

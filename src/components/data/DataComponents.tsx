@@ -557,17 +557,50 @@ export const LineChart: React.FC<DataProps> = ({ component, variables: _variable
 // ════════════════════════════════════════════════════════════════════════════
 // 5. Comparison Chart
 // ════════════════════════════════════════════════════════════════════════════
+const BriefcaseIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+  </svg>
+);
+
+const CalendarIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <line x1="16" y1="2" x2="16" y2="6" />
+    <line x1="8" y1="2" x2="8" y2="6" />
+    <line x1="3" y1="10" x2="21" y2="10" />
+    <circle cx="8" cy="14" r="1.2" fill="currentColor" />
+    <circle cx="12" cy="14" r="1.2" fill="currentColor" />
+    <circle cx="16" cy="14" r="1.2" fill="currentColor" />
+    <circle cx="8" cy="18" r="1.2" fill="currentColor" />
+    <circle cx="12" cy="18" r="1.2" fill="currentColor" />
+    <circle cx="16" cy="18" r="1.2" fill="currentColor" />
+  </svg>
+);
+
+const ExplodedPieChart: React.FC = () => {
+  return (
+    <svg width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+      {/* Large left/bottom slice */}
+      <path d="M46 52 L46 12 A40 40 0 1 0 81.3 69.5 Z" fill="#D4AF37" />
+      {/* Top-right slice */}
+      <path d="M54 46 L88.6 60 A40 40 0 0 0 54 6" fill="#F5E3A0" stroke="#05080F" strokeWidth="2" strokeLinejoin="round" />
+      {/* Small bottom-right slice */}
+      <path d="M54 54 L82.8 72 A40 40 0 0 1 54 94" fill="#997315" stroke="#05080F" strokeWidth="2" strokeLinejoin="round" />
+    </svg>
+  );
+};
+
 const Nifty500Logo: React.FC = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-        <svg width="22" height="22" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          {/* Left curve stem of N */}
-          <path d="M25 80C25 40 45 20 60 20" stroke="#4F46E5" strokeWidth="12" strokeLinecap="round" />
-          {/* Diagonal stem */}
-          <path d="M35 80L65 20" stroke="#818CF8" strokeWidth="12" strokeLinecap="round" />
-          {/* Right curve stem of N */}
-          <path d="M75 20C75 60 55 80 40 80" stroke="#EF4444" strokeWidth="12" strokeLinecap="round" />
+        <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Left curve (blue-indigo) */}
+          <path d="M25 75C25 55 35 35 55 35C68 35 75 42 75 50C75 58 68 65 58 65C48 65 41 55 41 45" stroke="#4F46E5" strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
+          {/* Right curve (orange-red) */}
+          <path d="M75 25C75 45 65 65 45 65C32 65 25 58 25 50C25 42 32 35 42 35C52 35 59 45 59 55" stroke="#EF4444" strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
         <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 800, fontSize: '15px', letterSpacing: '-0.3px' }}>
           <span style={{ color: '#E2E8F0' }}>Nifty</span>
@@ -607,15 +640,11 @@ export const ComparisonChart: React.FC<DataProps> = ({ component, variables }) =
       <div className="comp-panel panel-left animate-fade-up" style={{ '--stagger-delay': `calc(var(--chart-stagger, ${stagger}) + 0)` } as React.CSSProperties}>
         {/* Row 1: Profile & Quote */}
         <div className="comp-row-profile">
-          <svg viewBox="0 0 32 32" className="comp-avatar">
-            <defs>
-              <linearGradient id="avatarLeftGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#E0E0E0" />
-                <stop offset="100%" stopColor="#7E7E7E" />
-              </linearGradient>
-            </defs>
-            <path d="M16 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 14c-5.33 0-16 2.67-16 8v2h32v-2c0-5.33-10.67-8-16-8z" fill="url(#avatarLeftGrad)" />
-          </svg>
+          <div className="comp-avatar-circle">
+            <svg viewBox="0 0 32 32" className="comp-avatar">
+              <path d="M16 8a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9zm0 10.5c-4.67 0-9 2.33-9 5.5v1h18v-1c0-3.17-4.33-5.5-9-5.5z" fill="#9CA3AF" />
+            </svg>
+          </div>
           <div className="comp-profile-text">
             <span className="comp-profile-name">{leftTitle}:</span>
             <span className="comp-profile-quote">"{leftList[0] || ''}"</span>
@@ -624,22 +653,33 @@ export const ComparisonChart: React.FC<DataProps> = ({ component, variables }) =
 
         <hr className="comp-divider" />
 
+        {/* Section Header: What your friend did */}
+        <div className="comp-section-header">
+          <div className="comp-header-icon-box">
+            <BriefcaseIcon />
+          </div>
+          <span className="comp-section-title">What your friend did</span>
+        </div>
+
         {/* Row 2: Action & Product */}
         <div className="comp-row-middle">
           <div className="comp-middle-left">
             Your friend buys Equity Index ETF (a.k.a Benchmark)
           </div>
+          <div className="comp-middle-divider" />
           <div className="comp-middle-right">
             <Nifty500Logo />
           </div>
         </div>
 
-        <hr className="comp-divider" />
-
-        {/* Row 3: Callout Value at the Bottom */}
-        <div className="comp-row-bottom">
-          <div className="comp-bottom-left">5Y Later:</div>
-          <div className="comp-bottom-right">
+        {/* Row 3: Callout Value Box at the Bottom */}
+        <div className="comp-row-bottom-box">
+          <div className="comp-bottom-left-sec">
+            <CalendarIcon />
+            <span className="comp-bottom-left-text">5Y Later:</span>
+          </div>
+          <div className="comp-bottom-divider" />
+          <div className="comp-bottom-right-sec">
             <span className="comp-value-label">Current Value:</span>
             <span className="comp-value-amount">
               {leftValue && (
@@ -659,16 +699,11 @@ export const ComparisonChart: React.FC<DataProps> = ({ component, variables }) =
       <div className="comp-panel panel-right animate-fade-up" style={{ '--stagger-delay': `calc(var(--chart-stagger, ${stagger}) + 0.3)` } as React.CSSProperties}>
         {/* Row 1: Profile & Quote */}
         <div className="comp-row-profile">
-          <svg viewBox="0 0 32 32" className="comp-avatar">
-            <defs>
-              <linearGradient id="avatarRightGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#F9F5E8" />
-                <stop offset="50%" stopColor="#D4AF37" />
-                <stop offset="100%" stopColor="#8A6F27" />
-              </linearGradient>
-            </defs>
-            <path d="M16 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 14c-5.33 0-16 2.67-16 8v2h32v-2c0-5.33-10.67-8-16-8z" fill="url(#avatarRightGrad)" />
-          </svg>
+          <div className="comp-avatar-circle">
+            <svg viewBox="0 0 32 32" className="comp-avatar">
+              <path d="M16 8a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9zm0 10.5c-4.67 0-9 2.33-9 5.5v1h18v-1c0-3.17-4.33-5.5-9-5.5z" fill="#D4AF37" />
+            </svg>
+          </div>
           <div className="comp-profile-text">
             <span className="comp-profile-name accent">{rightTitle}:</span>
             <span className="comp-profile-quote">"{rightList[0] || ''}"</span>
@@ -677,22 +712,34 @@ export const ComparisonChart: React.FC<DataProps> = ({ component, variables }) =
 
         <hr className="comp-divider" />
 
+        {/* Section Header: What you did */}
+        <div className="comp-section-header">
+          <div className="comp-header-icon-box">
+            <BriefcaseIcon />
+          </div>
+          <span className="comp-section-title">What you did</span>
+        </div>
+
         {/* Row 2: Action & Product */}
         <div className="comp-row-middle">
           <div className="comp-middle-left">
             You create an actively managed portfolio
           </div>
+          <div className="comp-middle-divider" />
           <div className="comp-middle-right">
-            {rightList[1] || ''}
+            <ExplodedPieChart />
+            <span>{rightList[1] || ''}</span>
           </div>
         </div>
 
-        <hr className="comp-divider" />
-
-        {/* Row 3: Callout Value at the Bottom */}
-        <div className="comp-row-bottom">
-          <div className="comp-bottom-left">5Y Later:</div>
-          <div className="comp-bottom-right">
+        {/* Row 3: Callout Value Box at the Bottom */}
+        <div className="comp-row-bottom-box">
+          <div className="comp-bottom-left-sec">
+            <CalendarIcon />
+            <span className="comp-bottom-left-text">5Y Later:</span>
+          </div>
+          <div className="comp-bottom-divider" />
+          <div className="comp-bottom-right-sec">
             <span className="comp-value-label">Current Value:</span>
             <span className="comp-value-amount">
               {rightValue && (

@@ -1730,8 +1730,8 @@ input, textarea, select {
 
 .comp-panel {
   flex: 1;
-  border-radius: 14px;
-  padding: 1.5em 1.8em;
+  border-radius: 18px;
+  padding: 1.8em 2em;
   display: flex;
   flex-direction: column;
   backdrop-filter: blur(16px);
@@ -1739,61 +1739,124 @@ input, textarea, select {
 }
 
 .comp-panel.panel-left {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(18, 23, 33, 0.6);
 }
 
 .comp-panel.panel-right {
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  background: rgba(212, 175, 55, 0.03);
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  background: rgba(212, 175, 55, 0.02);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.03);
 }
 
 /* Row 1: Profile & Quote */
 .comp-row-profile {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  gap: 1em;
-  min-height: 4.5cqmin;
+  align-items: center;
+  gap: 1.2em;
+}
+
+.comp-avatar-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.comp-panel.panel-left .comp-avatar-circle {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.comp-panel.panel-right .comp-avatar-circle {
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .comp-avatar {
-  flex-shrink: 0;
-  width: 2.8em;
-  height: 2.8em;
+  width: 26px;
+  height: 26px;
 }
 
 .comp-profile-text {
   display: flex;
   flex-direction: column;
-  gap: 0.1em;
+  gap: 0.15em;
+  flex: 1;
 }
 
 .comp-profile-name {
   font-family: 'Inter Tight', sans-serif;
-  font-size: 1.05em;
+  font-size: 1.1em;
   font-weight: 700;
   color: var(--t1);
 }
 
 .comp-profile-name.accent {
-  color: var(--gold-l);
+  color: var(--gold);
 }
 
 .comp-profile-quote {
   font-family: 'Inter Tight', sans-serif;
   font-size: 0.88em;
   font-style: italic;
-  color: var(--t3);
-  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.35;
+}
+
+.comp-panel.panel-right .comp-profile-quote {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Section Header (What friend/you did) */
+.comp-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-top: 1.2em;
+  margin-bottom: 0.8em;
+}
+
+.comp-header-icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.comp-panel.panel-left .comp-header-icon-box {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.comp-panel.panel-right .comp-header-icon-box {
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--gold);
+}
+
+.comp-section-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  color: var(--t1);
+}
+
+.comp-panel.panel-right .comp-section-title {
+  color: var(--gold);
 }
 
 /* Dividers */
 .comp-divider {
   border: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  margin: 1.2em 0;
+  margin: 1.2em 0 0.8em 0;
   width: 100%;
 }
 
@@ -1806,68 +1869,121 @@ input, textarea, select {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  gap: 1em;
-  min-height: 4.2cqmin;
+  gap: 1.5em;
+  min-height: 5.2cqmin;
+  margin-bottom: 1.5em;
 }
 
 .comp-middle-left {
-  flex: 1.2;
+  flex: 1.1;
   font-family: 'Inter Tight', sans-serif;
   font-size: 0.9em;
-  font-weight: 600;
-  color: var(--t2);
-  line-height: 1.3;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+.comp-middle-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.comp-panel.panel-right .comp-middle-divider {
+  background: rgba(212, 175, 55, 0.15);
 }
 
 .comp-middle-right {
-  flex: 0.8;
+  flex: 0.9;
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
+  gap: 0.8em;
   font-family: 'Inter Tight', sans-serif;
   font-size: 0.88em;
-  color: var(--t3);
+  color: rgba(255, 255, 255, 0.7);
   line-height: 1.35;
 }
 
-/* Row 3: Callout Value at the Bottom */
-.comp-row-bottom {
+/* Row 3: Callout Value at the Bottom (Box Container) */
+.comp-row-bottom-box {
+  margin-top: auto; /* Pushes to bottom */
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  margin-top: auto; /* Pushes to bottom */
-  padding-top: 0.6em;
+  padding: 1em 1.2em;
+  border-radius: 10px;
+  gap: 1.2em;
+  box-sizing: border-box;
 }
 
-.comp-bottom-left {
+.comp-panel.panel-left .comp-row-bottom-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.comp-panel.panel-right .comp-row-bottom-box {
+  background: rgba(212, 175, 55, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.comp-bottom-left-sec {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  color: rgba(255, 255, 255, 0.7);
+  flex-shrink: 0;
+}
+
+.comp-panel.panel-right .comp-bottom-left-sec {
+  color: var(--gold);
+}
+
+.comp-bottom-left-text {
   font-family: 'Inter Tight', sans-serif;
   font-size: 0.95em;
   font-weight: 700;
-  color: var(--t2);
 }
 
-.comp-bottom-right {
+.comp-bottom-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.comp-panel.panel-right .comp-bottom-divider {
+  background: rgba(212, 175, 55, 0.2);
+}
+
+.comp-bottom-right-sec {
   display: flex;
-  align-items: center;
-  gap: 0.5em;
+  flex-direction: column;
+  gap: 0.1em;
 }
 
 .comp-value-label {
   font-family: 'Inter Tight', sans-serif;
-  font-size: 0.88em;
-  color: var(--t3);
+  font-size: 0.78em;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.comp-panel.panel-right .comp-value-label {
+  color: rgba(212, 175, 55, 0.6);
 }
 
 .comp-value-amount {
   font-family: 'Inter Tight', sans-serif;
-  font-size: 1.5em;
+  font-size: 1.6em;
   font-weight: 800;
   color: var(--t1);
+  line-height: 1;
 }
 
 .comp-panel.panel-right .comp-value-amount {
-  color: var(--gold-l);
+  color: var(--gold);
 }
 
 /* ── Donut Chart ── */

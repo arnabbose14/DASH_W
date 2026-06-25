@@ -2147,13 +2147,13 @@ export const defaultPresentation: Presentation = {
                     "color": "#C9A84C"
                   },
                   {
-                    "label": "AIF (Hedged equity, Real estate, Global)",
+                    "label": "AIF (Hedged equity, Real estate,\nGlobal)",
                     "x": 68,
                     "y": 75,
                     "color": "#C9A84C"
                   },
                   {
-                    "label": "Structured Products, AIF (PE/VC), Co-investments",
+                    "label": "Structured Products, AIF\n(PE/VC), Co-investments",
                     "x": 82,
                     "y": 90,
                     "color": "#8A8A8A"

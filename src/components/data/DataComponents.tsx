@@ -1019,10 +1019,33 @@ export const ScatterPlot: React.FC<DataProps> = ({ component, variables: _variab
                   transition: `opacity 0.6s ease calc(var(--chart-stagger, ${stagger}) * 0.1s + ${labelDelay}s)`
                 }}
               >
-                {pt.label.includes(',') ? (
+                {pt.label.includes('\n') ? (
                   <>
                     <text
-                      x={cx + 12}
+                      x={cx + 16}
+                      y={cy - 4}
+                      fill="var(--t1)"
+                      fontSize="12px"
+                      fontWeight="600"
+                      fontFamily="'Inter Tight', sans-serif"
+                    >
+                      {pt.label.split('\n')[0]}
+                    </text>
+                    <text
+                      x={cx + 16}
+                      y={cy + 10}
+                      fill="var(--t1)"
+                      fontSize="12px"
+                      fontWeight="600"
+                      fontFamily="'Inter Tight', sans-serif"
+                    >
+                      {pt.label.split('\n')[1]}
+                    </text>
+                  </>
+                ) : pt.label.includes(',') ? (
+                  <>
+                    <text
+                      x={cx + 16}
                       y={cy - 4}
                       fill="var(--t1)"
                       fontSize="12px"
@@ -1032,7 +1055,7 @@ export const ScatterPlot: React.FC<DataProps> = ({ component, variables: _variab
                       {pt.label.split(',')[0]}
                     </text>
                     <text
-                      x={cx + 12}
+                      x={cx + 16}
                       y={cy + 10}
                       fill="var(--t3)"
                       fontSize="10px"
@@ -1043,7 +1066,7 @@ export const ScatterPlot: React.FC<DataProps> = ({ component, variables: _variab
                   </>
                 ) : (
                   <text
-                    x={cx + 12}
+                    x={cx + 16}
                     y={cy + 4}
                     fill={isGold ? 'var(--gold-l)' : 'var(--t1)'}
                     fontSize="12px"

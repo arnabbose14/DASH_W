@@ -1811,8 +1811,8 @@ export const defaultPresentation: Presentation = {
                   },
                   "localProps": {
                     "widths": [
-                      "50%",
-                      "50%"
+                      "53%",
+                      "47%"
                     ]
                   },
                   "dataBindings": {},
@@ -1839,6 +1839,7 @@ export const defaultPresentation: Presentation = {
                           "localProps": {
                             "tag": "div",
                             "text": "Equity (32%)",
+                            "stagger": 3.0,
                             "style": {
                               "background": "linear-gradient(135deg, #ECC45C, #C9A84C)",
                               "color": "#FFFFFF",
@@ -1850,7 +1851,7 @@ export const defaultPresentation: Presentation = {
                               "padding": "1.2cqmin 1.5cqmin",
                               "borderRadius": "12px",
                               "boxShadow": "0 4px 20px rgba(201,168,76,0.12)",
-                              "flex": "1.3",
+                              "flex": "32",
                               "boxSizing": "border-box"
                             }
                           }
@@ -1866,6 +1867,7 @@ export const defaultPresentation: Presentation = {
                           "localProps": {
                             "tag": "div",
                             "text": "Debt (21%)",
+                            "stagger": 4.0,
                             "style": {
                               "background": "linear-gradient(135deg, #A8A8A8, #7D7D7D)",
                               "color": "#FFFFFF",
@@ -1877,7 +1879,7 @@ export const defaultPresentation: Presentation = {
                               "padding": "1.2cqmin 1.5cqmin",
                               "borderRadius": "12px",
                               "boxShadow": "0 4px 20px rgba(255,255,255,0.02)",
-                              "flex": "1.0",
+                              "flex": "21",
                               "boxSizing": "border-box"
                             }
                           }
@@ -1906,6 +1908,7 @@ export const defaultPresentation: Presentation = {
                           "localProps": {
                             "tag": "div",
                             "text": "Real estate (29%)",
+                            "stagger": 3.5,
                             "style": {
                               "background": "linear-gradient(135deg, #FFFFFF, #EAEAEA)",
                               "color": "#111827",
@@ -1917,7 +1920,7 @@ export const defaultPresentation: Presentation = {
                               "padding": "1.2cqmin 1.5cqmin",
                               "borderRadius": "12px",
                               "boxShadow": "0 4px 20px rgba(255,255,255,0.05)",
-                              "flex": "1.3",
+                              "flex": "29",
                               "boxSizing": "border-box"
                             }
                           }
@@ -1933,6 +1936,7 @@ export const defaultPresentation: Presentation = {
                           "localProps": {
                             "tag": "div",
                             "text": "Alternate assets (18%)",
+                            "stagger": 4.5,
                             "style": {
                               "background": "linear-gradient(135deg, #4B5563, #1F2937)",
                               "color": "#FFFFFF",
@@ -1944,7 +1948,7 @@ export const defaultPresentation: Presentation = {
                               "padding": "1.2cqmin 1.5cqmin",
                               "borderRadius": "12px",
                               "boxShadow": "0 4px 20px rgba(0,0,0,0.15)",
-                              "flex": "1.0",
+                              "flex": "18",
                               "boxSizing": "border-box"
                             }
                           }

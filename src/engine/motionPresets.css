@@ -1,0 +1,362 @@
+/* ==========================================================================
+   DASH Engine Motion Presets (Layer 3)
+   ========================================================================== */
+
+/* --- Keyframe Definitions --- */
+
+/* 1. Luxury Presets (Slow, majestic, blur-ins, character expansions) */
+@keyframes luxury-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes luxury-draw {
+  0% {
+    stroke-dashoffset: 1000;
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.3;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* 2. Premium Presets (Elegant springs, smooth transitions) */
+@keyframes premium-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3. Executive Presets (Professional, crisp, fast) */
+@keyframes executive-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 4. Energetic Presets (Springy overshoot scale-ups, bouncy) */
+@keyframes energetic-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(35px) scale(0.92);
+  }
+  65% {
+    transform: translateY(-8px) scale(1.03);
+  }
+  85% {
+    transform: translateY(2px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 5. Minimal Presets (Pure crossfades, clean, immediate) */
+@keyframes minimal-fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* --- Slide Activation Classes --- */
+
+/* Luxury Preset styling */
+.motion-luxury .slide-active .animate-fade-up,
+.motion-luxury.slide-active .animate-fade-up {
+  animation: luxury-fade-up 1.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.15s);
+  opacity: 0;
+}
+
+.motion-luxury .slide-active .animate-grow-y,
+.motion-luxury.slide-active .animate-grow-y {
+  transform-origin: bottom;
+  animation: premium-fade-up 1.4s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.1s);
+  opacity: 0;
+}
+
+.motion-luxury .slide-active .animate-draw,
+.motion-luxury.slide-active .animate-draw {
+  animation: luxury-draw 2.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.2s);
+}
+
+.motion-luxury .slide-active .animate-container-fade,
+.motion-luxury.slide-active .animate-container-fade {
+  animation: minimal-fade 1.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.15s);
+  opacity: 0;
+}
+
+/* Premium Preset styling */
+.motion-premium .slide-active .animate-fade-up,
+.motion-premium.slide-active .animate-fade-up {
+  animation: premium-fade-up 1.0s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.1s);
+  opacity: 0;
+}
+
+.motion-premium .slide-active .animate-grow-y,
+.motion-premium.slide-active .animate-grow-y {
+  transform-origin: bottom;
+  animation: premium-fade-up 1.0s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.08s);
+  opacity: 0;
+}
+
+.motion-premium .slide-active .animate-draw,
+.motion-premium.slide-active .animate-draw {
+  animation: luxury-draw 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.12s);
+}
+
+.motion-premium .slide-active .animate-container-fade,
+.motion-premium.slide-active .animate-container-fade {
+  animation: minimal-fade 1.0s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.1s);
+  opacity: 0;
+}
+
+/* Executive Preset styling */
+.motion-executive .slide-active .animate-fade-up,
+.motion-executive.slide-active .animate-fade-up {
+  animation: executive-fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.06s);
+  opacity: 0;
+}
+
+.motion-executive .slide-active .animate-grow-y,
+.motion-executive.slide-active .animate-grow-y {
+  transform-origin: bottom;
+  animation: executive-fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.05s);
+  opacity: 0;
+}
+
+.motion-executive .slide-active .animate-draw,
+.motion-executive.slide-active .animate-draw {
+  animation: luxury-draw 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.08s);
+}
+
+.motion-executive .slide-active .animate-container-fade,
+.motion-executive.slide-active .animate-container-fade {
+  animation: minimal-fade 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.06s);
+  opacity: 0;
+}
+
+/* Energetic Preset styling */
+.motion-energetic .slide-active .animate-fade-up,
+.motion-energetic.slide-active .animate-fade-up {
+  animation: energetic-fade-up 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.06s);
+  opacity: 0;
+}
+
+.motion-energetic .slide-active .animate-grow-y,
+.motion-energetic.slide-active .animate-grow-y {
+  transform-origin: bottom;
+  animation: energetic-fade-up 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.05s);
+  opacity: 0;
+}
+
+.motion-energetic .slide-active .animate-draw,
+.motion-energetic.slide-active .animate-draw {
+  animation: luxury-draw 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.08s);
+}
+
+.motion-energetic .slide-active .animate-container-fade,
+.motion-energetic.slide-active .animate-container-fade {
+  animation: minimal-fade 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.06s);
+  opacity: 0;
+}
+
+/* Minimal Preset styling */
+.motion-minimal .slide-active .animate-fade-up,
+.motion-minimal.slide-active .animate-fade-up {
+  animation: minimal-fade 0.4s ease-out forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.03s);
+  opacity: 0;
+}
+
+.motion-minimal .slide-active .animate-grow-y,
+.motion-minimal.slide-active .animate-grow-y {
+  animation: minimal-fade 0.4s ease-out forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.02s);
+  opacity: 0;
+}
+
+.motion-minimal .slide-active .animate-draw,
+.motion-minimal.slide-active .animate-draw {
+  animation: minimal-fade 0.5s ease-out forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.04s);
+}
+
+.motion-minimal .slide-active .animate-container-fade,
+.motion-minimal.slide-active .animate-container-fade {
+  animation: minimal-fade 0.4s ease-out forwards;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.03s);
+  opacity: 0;
+}
+
+/* --- Slide Transitions --- */
+.dash-slide-wrapper {
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-transition-enter {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+.slide-transition-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ==========================================================================
+   DASH·W — .play Class Activation System
+   Elements start hidden. When .dash-slide-frame receives .play class,
+   they transition in with staggered delays matching the reference's
+   eyebrow → headline → subline → content cascade.
+   ========================================================================== */
+
+/* Base hidden states for animatable elements */
+.dash-slide-frame .slide-eyebrow,
+.dash-slide-frame .slide-headline,
+.dash-slide-frame .slide-subline,
+.dash-slide-frame .slide-content,
+.dash-slide-frame .animate-fade-up {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Container Fade: pure opacity transition, no translateY */
+.dash-slide-frame .animate-container-fade {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+/* Eyebrow: first in */
+.dash-slide-frame .slide-eyebrow {
+  transform: translateY(6px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Subline: slightly delayed */
+.dash-slide-frame .slide-subline {
+  transform: translateY(8px);
+  transition: opacity 0.6s ease 0.17s, transform 0.6s ease 0.17s;
+}
+
+/* Content blocks: further delayed */
+.dash-slide-frame .slide-content {
+  transform: translateY(10px);
+  transition: opacity 0.6s ease 0.28s, transform 0.6s ease 0.28s;
+}
+
+/* --- Play state: all visible --- */
+.dash-slide-frame.play .slide-eyebrow,
+.dash-slide-frame.play .slide-headline,
+.dash-slide-frame.play .slide-subline,
+.dash-slide-frame.play .slide-content,
+.dash-slide-frame.play .animate-fade-up,
+.dash-slide-frame.play .animate-container-fade {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dash-slide-frame.play .animate-container-fade {
+  transform: none; /* keep pure opacity fade */
+}
+
+/* Stagger for .animate-fade-up and .animate-container-fade elements using CSS custom property */
+.dash-slide-frame.play .animate-fade-up,
+.dash-slide-frame.play .animate-container-fade {
+  transition-delay: calc(var(--stagger-delay, 0) * 0.1s);
+}
+
+/* --- Scale-up for cards and KPIs --- */
+.dash-slide-frame .animate-scale-up {
+  opacity: 0;
+  transform: translateY(10px) scale(0.97);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.dash-slide-frame.play .animate-scale-up {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: calc(var(--stagger-delay, 0) * 0.14s);
+}
+
+/* --- Bar grow-x: no longer CSS-animated (React state-driven via MutationObserver) --- */
+/* Bar and donut animations are handled by React state transitions in DataComponents.tsx */
+
+/* --- SVG Draw animation: paused until slide plays --- */
+.dash-slide-frame .animate-draw {
+  animation: luxury-draw 2s cubic-bezier(0.19, 1, 0.22, 1) both;
+  animation-delay: calc(var(--stagger-delay, 0) * 0.15s);
+  animation-play-state: paused;
+}
+.dash-slide-frame.play .animate-draw {
+  animation-play-state: running;
+}
+
+/* --- Float animation for premium cards --- */
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-4px); }
+}
+
+/* --- Gold shimmer text --- */
+@keyframes goldShimmer {
+  0%, 100% { background-position: 0% 0; }
+  50%       { background-position: 100% 0; }
+}
+
+.shimmer-text {
+  background: linear-gradient(135deg, #EDE8DF 0%, #E8C96A 52%, #EDE8DF 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 6s ease-in-out infinite;
+}
+
+/* --- Alpha glow pulse --- */
+@keyframes alphaGlowPulse {
+  0%, 100% { opacity: 0.72; }
+  50%       { opacity: 1; }
+}
+

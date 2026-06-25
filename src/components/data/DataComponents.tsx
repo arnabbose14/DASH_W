@@ -168,7 +168,7 @@ export const BarChart: React.FC<DataProps> = ({ component, variables: _variables
                     '--stagger-delay': `calc(var(--chart-stagger, ${stagger}) + ${index + 2})`,
                   } as React.CSSProperties}
                 >
-                  {item.value}{unit}
+                  {item.prefix || component.localProps?.prefix || ''}{item.value}{unit}
                 </div>
 
                 {/* Bar track */}
@@ -319,7 +319,7 @@ export const BarChart: React.FC<DataProps> = ({ component, variables: _variables
                   '--stagger-delay': `calc(var(--chart-stagger, ${stagger}) + ${index + 1})`,
                 } as React.CSSProperties}
               >
-                {item.value}{unit}
+                {item.prefix || component.localProps?.prefix || ''}{item.value}{unit}
               </div>
             </div>
           );
@@ -1108,21 +1108,31 @@ export const GroupedBarChart: React.FC<DataProps> = ({ component, variables: _va
   const COLOR_PMS = '#C9A84C'; // Gold
   const COLOR_BSE = '#4B5563'; // Gray
 
+  const legend = component.localProps?.legend || [
+    { label: 'Wealth Edge PMS', color: COLOR_PMS },
+    { label: 'BSE 500 TRI', color: COLOR_BSE }
+  ];
+
+  const legendAlign = component.localProps?.legendAlign || 'flex-end';
+
   return (
     <div
       ref={rootRef}
       className="dash-grouped-bar-chart animate-fade-up"
       style={{ ...style, '--stagger-delay': stagger, '--chart-stagger': stagger } as React.CSSProperties}
     >
-      <div className="grouped-chart-legend">
-        <div className="legend-item">
-          <span className="legend-dot" style={{ backgroundColor: COLOR_PMS }} />
-          <span>Wealth Edge PMS</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-dot" style={{ backgroundColor: COLOR_BSE }} />
-          <span>BSE 500 TRI</span>
-        </div>
+      <div className="grouped-chart-legend" style={{ justifyContent: legendAlign }}>
+        {legend.map((item: any, idx: number) => (
+          <div key={idx} className="legend-item">
+            <span
+              className="legend-dot"
+              style={{
+                background: item.color
+              }}
+            />
+            <span>{item.label}</span>
+          </div>
+        ))}
       </div>
 
       <div className="grouped-bars-container">
@@ -1143,63 +1153,47 @@ export const GroupedBarChart: React.FC<DataProps> = ({ component, variables: _va
               <div className="grouped-bars-track">
                 <div className="grouped-axis-line" style={{ bottom: `${zeroPercent}%` }} />
 
-                <div className="bar-fill-wrapper">
-                  <div
-                    className="bar-value-top label-pms"
-                    style={{
-                      opacity: isPlaying ? 1 : 0,
-                      bottom: group.values[0] >= 0
-                        ? `calc(${zeroPercent + (Math.abs(group.values[0]) / range) * 100}% + 4px)`
-                        : 'auto',
-                      top: group.values[0] < 0
-                        ? `calc(${100 - zeroPercent + (Math.abs(group.values[0]) / range) * 100}% + 4px)`
-                        : 'auto',
-                      transition: 'opacity 0.4s ease 0.8s'
-                    }}
-                  >
-                    {group.values[0]}{unit}
-                  </div>
-                  <div
-                    className="grouped-bar-fill pms-fill"
-                    style={{
-                      height: isPlaying ? `${(Math.abs(group.values[0]) / range) * 100}%` : '0%',
-                      bottom: group.values[0] >= 0 ? `${zeroPercent}%` : 'auto',
-                      top: group.values[0] < 0 ? `${100 - zeroPercent}%` : 'auto',
-                      backgroundColor: COLOR_PMS,
-                      transformOrigin: group.values[0] >= 0 ? 'bottom' : 'top',
-                      transition: `height 1s cubic-bezier(0.25,1,0.5,1) calc(var(--chart-stagger, ${stagger}) * 0.1s + ${delayBase}s)`
-                    }}
-                  />
-                </div>
+                {group.values.map((val: number, valIdx: number) => {
+                  const legendItem = legend[valIdx] || { label: '', color: '#CCCCCC' };
+                  const barColor = legendItem.color;
+                  const isGold = barColor === COLOR_PMS || barColor.includes('var(--gold)');
+                  const valPercent = (Math.abs(val) / range) * 100;
+                  const animatedH = isPlaying ? `${valPercent}%` : '0%';
+                  const isNegative = val < 0;
 
-                <div className="bar-fill-wrapper">
-                  <div
-                    className="bar-value-top label-bse"
-                    style={{
-                      opacity: isPlaying ? 1 : 0,
-                      bottom: group.values[1] >= 0
-                        ? `calc(${zeroPercent + (Math.abs(group.values[1]) / range) * 100}% + 4px)`
-                        : 'auto',
-                      top: group.values[1] < 0
-                        ? `calc(${100 - zeroPercent + (Math.abs(group.values[1]) / range) * 100}% + 4px)`
-                        : 'auto',
-                      transition: 'opacity 0.4s ease 0.8s'
-                    }}
-                  >
-                    {group.values[1]}{unit}
-                  </div>
-                  <div
-                    className="grouped-bar-fill bse-fill"
-                    style={{
-                      height: isPlaying ? `${(Math.abs(group.values[1]) / range) * 100}%` : '0%',
-                      bottom: group.values[1] >= 0 ? `${zeroPercent}%` : 'auto',
-                      top: group.values[1] < 0 ? `${100 - zeroPercent}%` : 'auto',
-                      backgroundColor: COLOR_BSE,
-                      transformOrigin: group.values[1] >= 0 ? 'bottom' : 'top',
-                      transition: `height 1s cubic-bezier(0.25,1,0.5,1) calc(var(--chart-stagger, ${stagger}) * 0.1s + ${delayBase}s)`
-                    }}
-                  />
-                </div>
+                  return (
+                    <div key={valIdx} className="bar-fill-wrapper">
+                      <div
+                        className={`bar-value-top ${isGold ? 'label-pms' : 'label-bse'}`}
+                        style={{
+                          opacity: isPlaying ? 1 : 0,
+                          bottom: !isNegative
+                            ? `calc(${zeroPercent + valPercent}% + 4px)`
+                            : 'auto',
+                          top: isNegative
+                            ? `calc(${100 - zeroPercent + valPercent}% + 4px)`
+                            : 'auto',
+                          color: legendItem.textColor || (isGold ? 'var(--gold-l)' : 'var(--t1)'),
+                          transition: 'opacity 0.4s ease 0.8s'
+                        }}
+                      >
+                        {component.localProps?.prefix || ''}{val}{unit}
+                      </div>
+                      <div
+                        className={`grouped-bar-fill ${isGold ? 'pms-fill' : 'bse-fill'}`}
+                        style={{
+                          height: animatedH,
+                          bottom: !isNegative ? `${zeroPercent}%` : 'auto',
+                          top: isNegative ? `${100 - zeroPercent}%` : 'auto',
+                          background: barColor,
+                          boxShadow: isGold ? '0 -6px 24px rgba(201, 168, 76, 0.35)' : 'none',
+                          transformOrigin: !isNegative ? 'bottom' : 'top',
+                          transition: `height 1s cubic-bezier(0.25,1,0.5,1) calc(var(--chart-stagger, ${stagger}) * 0.1s + ${delayBase}s)`
+                        }}
+                      />
+                    </div>
+                  );
+                })}
               </div>
 
               <div

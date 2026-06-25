@@ -2632,7 +2632,7 @@ export const defaultPresentation: Presentation = {
                 "width": "fill",
                 "height": "fill",
                 "gap": "2cqmin",
-                "alignItems": "center"
+                "alignItems": "stretch"
               },
               "dataBindings": {},
               "localProps": {
@@ -2644,60 +2644,90 @@ export const defaultPresentation: Presentation = {
               },
               "children": [
                 {
-                  "id": "sc_pms_perf_chart",
-                  "type": "bar-chart",
-                  "dataBindings": {},
+                  "id": "sc_pms_perf_card",
+                  "type": "stack",
                   "layout": {
                     "width": "fill",
-                    "height": "fill"
+                    "height": "fill",
+                    "direction": "column"
                   },
                   "localProps": {
-                    "data": [
-                      {
-                        "label": "1Yr Returns (PMS)",
-                        "value": 62,
-                        "highlight": true,
-                        "color": "linear-gradient(to top, #0072FF, #00C6FF)",
-                        "textColor": "#00C6FF",
-                        "shadow": "0 -6px 24px rgba(0, 198, 255, 0.45)"
+                    "style": {
+                      "background": "rgba(201, 168, 76, 0.02)",
+                      "border": "1px solid rgba(201, 168, 76, 0.12)",
+                      "borderRadius": "16px",
+                      "overflow": "hidden",
+                      "boxSizing": "border-box"
+                    }
+                  },
+                  "dataBindings": {},
+                  "children": [
+                    {
+                      "id": "sc_pms_perf_header",
+                      "type": "headline",
+                      "dataBindings": {},
+                      "layout": {
+                        "width": "fill",
+                        "height": "fit"
                       },
-                      {
-                        "label": "1Yr Returns (MF)",
-                        "value": 3,
-                        "highlight": false,
-                        "color": "linear-gradient(to top, #004e92, #0072FF)",
-                        "textColor": "var(--t1)",
-                        "shadow": "none"
-                      },
-                      {
-                        "label": "3Yr Returns (PMS)",
-                        "value": 53,
-                        "highlight": true,
-                        "color": "linear-gradient(to top, var(--gold-dim), var(--gold-l))",
-                        "textColor": "var(--gold-l)",
-                        "shadow": "0 -6px 24px rgba(201, 168, 76, 0.35)"
-                      },
-                      {
-                        "label": "3Yr Returns (MF)",
-                        "value": 31,
-                        "highlight": false,
-                        "color": "linear-gradient(to top, var(--gold-dim), var(--gold))",
-                        "textColor": "var(--t1)",
-                        "shadow": "none"
-                      },
-                      {
-                        "label": "3Yr Returns (Nifty Small)",
-                        "value": 20,
-                        "highlight": false,
-                        "color": "linear-gradient(to top, var(--gold-dim), var(--gold))",
-                        "textColor": "var(--t1)",
-                        "shadow": "none"
+                      "localProps": {
+                        "tag": "div",
+                        "text": "Periodic Performance (CAGR)",
+                        "style": {
+                          "background": "#000000",
+                          "color": "#FFFFFF",
+                          "fontWeight": "bold",
+                          "fontSize": "1.35cqmin",
+                          "textAlign": "center",
+                          "padding": "1.2cqmin 0",
+                          "width": "100%",
+                          "letterSpacing": "0.05em"
+                        }
                       }
-                    ],
-                    "unit": "%",
-                    "maxValue": 70,
-                    "layoutType": "vertical"
-                  }
+                    },
+                    {
+                      "id": "sc_pms_perf_chart_container",
+                      "type": "stack",
+                      "layout": {
+                        "width": "fill",
+                        "height": "fill",
+                        "direction": "column",
+                        "padding": "2.5cqmin 2.5cqmin 1.5cqmin 2.5cqmin"
+                      },
+                      "dataBindings": {},
+                      "children": [
+                        {
+                          "id": "sc_pms_perf_chart",
+                          "type": "grouped-bar-chart",
+                          "dataBindings": {},
+                          "layout": {
+                            "width": "fill",
+                            "height": "fill"
+                          },
+                          "localProps": {
+                            "legendAlign": "center",
+                            "legend": [
+                              { "label": "Small-cap PMS (Select)", "color": "linear-gradient(to top, var(--gold-dim), var(--gold-l))" },
+                              { "label": "Top Smallcap MF 250", "color": "linear-gradient(to top, #4B5563, #6B7280)" },
+                              { "label": "NIFTY Smallcap", "color": "linear-gradient(to top, #00A8B5, #00E5FF)" }
+                            ],
+                            "groups": [
+                              {
+                                "label": "Returns 1 Yr",
+                                "values": [62, 3]
+                              },
+                              {
+                                "label": "Returns 3 Yr",
+                                "values": [53, 31, 20]
+                              }
+                            ],
+                            "maxValue": 70,
+                            "unit": "%"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "id": "sc_pms_connector",
@@ -2705,49 +2735,120 @@ export const defaultPresentation: Presentation = {
                   "dataBindings": {},
                   "layout": {
                     "width": "fill",
-                    "height": "fit"
+                    "height": "fill"
                   },
                   "localProps": {
                     "tag": "div",
-                    "text": "➔",
+                    "text": "▶",
                     "style": {
-                      "fontSize": "36px",
+                      "fontSize": "32px",
                       "color": "var(--gold)",
                       "textAlign": "center",
-                      "fontWeight": "bold"
+                      "fontWeight": "bold",
+                      "height": "100%",
+                      "display": "flex",
+                      "alignItems": "center",
+                      "justifyContent": "center"
                     }
                   }
                 },
                 {
-                  "id": "sc_pms_5y_chart",
-                  "type": "bar-chart",
-                  "dataBindings": {},
+                  "id": "sc_pms_5y_card",
+                  "type": "stack",
                   "layout": {
                     "width": "fill",
-                    "height": "fill"
+                    "height": "fill",
+                    "direction": "column"
                   },
                   "localProps": {
-                    "data": [
-                      {
-                        "label": "Small-cap PMS (Select)",
-                        "value": 82.5,
-                        "highlight": true
+                    "style": {
+                      "background": "rgba(201, 168, 76, 0.02)",
+                      "border": "1px solid rgba(201, 168, 76, 0.12)",
+                      "borderRadius": "16px",
+                      "overflow": "hidden",
+                      "boxSizing": "border-box"
+                    }
+                  },
+                  "dataBindings": {},
+                  "children": [
+                    {
+                      "id": "sc_pms_5y_header",
+                      "type": "headline",
+                      "dataBindings": {},
+                      "layout": {
+                        "width": "fill",
+                        "height": "fit"
                       },
-                      {
-                        "label": "Top Smallcap MF",
-                        "value": 39.2,
-                        "highlight": false
-                      },
-                      {
-                        "label": "NIFTY Smallcap 250",
-                        "value": 25,
-                        "highlight": false
+                      "localProps": {
+                        "tag": "div",
+                        "text": "Current value of ₹10L invested 5Y ago",
+                        "style": {
+                          "background": "#000000",
+                          "color": "#FFFFFF",
+                          "fontWeight": "bold",
+                          "fontSize": "1.35cqmin",
+                          "textAlign": "center",
+                          "padding": "1.2cqmin 0",
+                          "width": "100%",
+                          "letterSpacing": "0.05em"
+                        }
                       }
-                    ],
-                    "unit": "L",
-                    "maxValue": 90,
-                    "layoutType": "vertical"
-                  }
+                    },
+                    {
+                      "id": "sc_pms_5y_chart_container",
+                      "type": "stack",
+                      "layout": {
+                        "width": "fill",
+                        "height": "fill",
+                        "direction": "column",
+                        "padding": "2.5cqmin"
+                      },
+                      "dataBindings": {},
+                      "children": [
+                        {
+                          "id": "sc_pms_5y_chart",
+                          "type": "bar-chart",
+                          "dataBindings": {},
+                          "layout": {
+                            "width": "fill",
+                            "height": "fill"
+                          },
+                          "localProps": {
+                            "data": [
+                              {
+                                "label": "Small-cap PMS (Select)",
+                                "value": "82.5",
+                                "highlight": true,
+                                "color": "linear-gradient(to top, var(--gold-dim), var(--gold-l))",
+                                "textColor": "var(--gold-l)",
+                                "shadow": "0 -6px 24px rgba(201, 168, 76, 0.35)"
+                              },
+                              {
+                                "label": "Top Smallcap MF",
+                                "value": "39.2",
+                                "highlight": false,
+                                "color": "linear-gradient(to top, #4B5563, #6B7280)",
+                                "textColor": "var(--t1)",
+                                "shadow": "none"
+                              },
+                              {
+                                "label": "NIFTY Smallcap 250",
+                                "value": "25.0",
+                                "highlight": false,
+                                "color": "linear-gradient(to top, #00A8B5, #00E5FF)",
+                                "textColor": "#00E5FF",
+                                "shadow": "none"
+                              }
+                            ],
+                            "unit": "L",
+                            "prefix": "₹",
+                            "maxValue": 90,
+                            "layoutType": "vertical"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
@@ -2760,7 +2861,7 @@ export const defaultPresentation: Presentation = {
                 "height": "fit"
               },
               "localProps": {
-                "text": "Left Chart: Periodic Performance (CAGR) | Right Chart: Current value of ₹10L invested 5Y ago | Source: AMC Disclosures, W Research. Data as of January 2026",
+                "text": "Source: AMC Disclosures, W Research. Data as of January 2026)",
                 "className": "slide-paragraph"
               }
             }

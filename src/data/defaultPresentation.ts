@@ -2656,27 +2656,42 @@ export const defaultPresentation: Presentation = {
                       {
                         "label": "1Yr Returns (PMS)",
                         "value": 62,
-                        "highlight": true
+                        "highlight": true,
+                        "color": "linear-gradient(to top, #0072FF, #00C6FF)",
+                        "textColor": "#00C6FF",
+                        "shadow": "0 -6px 24px rgba(0, 198, 255, 0.45)"
                       },
                       {
                         "label": "1Yr Returns (MF)",
                         "value": 3,
-                        "highlight": false
+                        "highlight": false,
+                        "color": "linear-gradient(to top, #004e92, #0072FF)",
+                        "textColor": "var(--t1)",
+                        "shadow": "none"
                       },
                       {
                         "label": "3Yr Returns (PMS)",
                         "value": 53,
-                        "highlight": true
+                        "highlight": true,
+                        "color": "linear-gradient(to top, var(--gold-dim), var(--gold-l))",
+                        "textColor": "var(--gold-l)",
+                        "shadow": "0 -6px 24px rgba(201, 168, 76, 0.35)"
                       },
                       {
                         "label": "3Yr Returns (MF)",
                         "value": 31,
-                        "highlight": false
+                        "highlight": false,
+                        "color": "linear-gradient(to top, var(--gold-dim), var(--gold))",
+                        "textColor": "var(--t1)",
+                        "shadow": "none"
                       },
                       {
                         "label": "3Yr Returns (Nifty Small)",
                         "value": 20,
-                        "highlight": false
+                        "highlight": false,
+                        "color": "linear-gradient(to top, var(--gold-dim), var(--gold))",
+                        "textColor": "var(--t1)",
+                        "shadow": "none"
                       }
                     ],
                     "unit": "%",

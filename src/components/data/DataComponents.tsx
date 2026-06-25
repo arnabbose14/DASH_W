@@ -162,9 +162,9 @@ export const BarChart: React.FC<DataProps> = ({ component, variables: _variables
                     marginBottom: '6px',
                     whiteSpace: 'nowrap',
                     zIndex: 10,
-                    color: isNegative
+                    color: item.textColor || (isNegative
                       ? 'var(--color-negative, #EF9A9A)'
-                      : (item.highlight ? 'var(--gold-l)' : 'var(--t1)'),
+                      : (item.highlight ? 'var(--gold-l)' : 'var(--t1)')),
                     '--stagger-delay': `calc(var(--chart-stagger, ${stagger}) + ${index + 2})`,
                   } as React.CSSProperties}
                 >
@@ -183,16 +183,16 @@ export const BarChart: React.FC<DataProps> = ({ component, variables: _variables
                       width: '100%',
                       left: 0,
                       transformOrigin: isNegative ? 'top' : 'bottom',
-                      background: isNegative
+                      background: item.color || (isNegative
                         ? (item.highlight
                           ? 'linear-gradient(to bottom, var(--color-negative, #ef9a9a), #ffcdd2)'
                           : 'linear-gradient(to bottom, var(--color-negative-strong, #e57373), var(--color-negative, #ef9a9a))')
                         : (item.highlight
                           ? 'linear-gradient(to top, var(--gold-dim), var(--gold-l))'
-                          : 'linear-gradient(to top, var(--gold-dim), var(--gold))'),
-                      boxShadow: isNegative
+                          : 'linear-gradient(to top, var(--gold-dim), var(--gold))')),
+                      boxShadow: item.shadow || (isNegative
                         ? (item.highlight ? '0 4px 16px rgba(229,115,115,0.45)' : 'none')
-                        : (item.highlight ? '0 -6px 24px rgba(201,168,76,0.35)' : 'none'),
+                        : (item.highlight ? '0 -6px 24px rgba(201,168,76,0.35)' : 'none')),
                       borderRadius: isNegative ? '0 0 8px 8px' : '8px 8px 0 0',
                       transition: `height 1.1s cubic-bezier(0.25,1,0.5,1) calc(var(--chart-stagger, ${stagger}) * 0.1s + ${delay}s), opacity 0.4s ease calc(var(--chart-stagger, ${stagger}) * 0.1s + ${delay}s)`,
                       opacity: isPlaying ? 1 : 0,

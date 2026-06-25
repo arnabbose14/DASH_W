@@ -1698,9 +1698,9 @@ export const defaultPresentation: Presentation = {
               "dataBindings": {},
               "localProps": {
                 "widths": [
-                  "34%",
-                  "32%",
-                  "34%"
+                  "31%",
+                  "38%",
+                  "31%"
                 ]
               },
               "children": [
@@ -1802,109 +1802,154 @@ export const defaultPresentation: Presentation = {
                   ]
                 },
                 {
-                  "id": "elite_col2_stack",
-                  "type": "stack",
+                  "id": "elite_col2_columns",
+                  "type": "columns",
                   "layout": {
                     "width": "fill",
                     "height": "fill",
-                    "direction": "column",
-                    "gap": "0.8cqmin",
-                    "justifyContent": "between"
+                    "gap": "1.2cqmin"
+                  },
+                  "localProps": {
+                    "widths": [
+                      "50%",
+                      "50%"
+                    ]
                   },
                   "dataBindings": {},
                   "children": [
                     {
-                      "id": "tree_equity",
-                      "type": "headline",
-                      "dataBindings": {},
+                      "id": "elite_col2_left",
+                      "type": "stack",
                       "layout": {
                         "width": "fill",
-                        "height": "fill"
+                        "height": "fill",
+                        "direction": "column",
+                        "gap": "1.2cqmin"
                       },
-                      "localProps": {
-                        "tag": "div",
-                        "text": "Equity (32%)",
-                        "style": {
-                          "backgroundColor": "#C9A84C",
-                          "color": "#05080F",
-                          "fontWeight": 700,
-                          "fontSize": "13px",
-                          "display": "flex",
-                          "alignItems": "center",
-                          "justifyContent": "center",
-                          "borderRadius": "8px",
-                          "boxShadow": "0 4px 12px rgba(201,168,76,0.15)"
+                      "dataBindings": {},
+                      "children": [
+                        {
+                          "id": "tree_equity",
+                          "type": "headline",
+                          "dataBindings": {},
+                          "layout": {
+                            "width": "fill",
+                            "height": "fill"
+                          },
+                          "localProps": {
+                            "tag": "div",
+                            "text": "Equity (32%)",
+                            "style": {
+                              "background": "linear-gradient(135deg, #ECC45C, #C9A84C)",
+                              "color": "#FFFFFF",
+                              "fontWeight": 700,
+                              "fontSize": "1.25cqmin",
+                              "display": "flex",
+                              "alignItems": "flex-end",
+                              "justifyContent": "flex-start",
+                              "padding": "1.2cqmin 1.5cqmin",
+                              "borderRadius": "12px",
+                              "boxShadow": "0 4px 20px rgba(201,168,76,0.12)",
+                              "flex": "1.3",
+                              "boxSizing": "border-box"
+                            }
+                          }
+                        },
+                        {
+                          "id": "tree_debt",
+                          "type": "headline",
+                          "dataBindings": {},
+                          "layout": {
+                            "width": "fill",
+                            "height": "fill"
+                          },
+                          "localProps": {
+                            "tag": "div",
+                            "text": "Debt (21%)",
+                            "style": {
+                              "background": "linear-gradient(135deg, #A8A8A8, #7D7D7D)",
+                              "color": "#FFFFFF",
+                              "fontWeight": 700,
+                              "fontSize": "1.25cqmin",
+                              "display": "flex",
+                              "alignItems": "flex-end",
+                              "justifyContent": "flex-start",
+                              "padding": "1.2cqmin 1.5cqmin",
+                              "borderRadius": "12px",
+                              "boxShadow": "0 4px 20px rgba(255,255,255,0.02)",
+                              "flex": "1.0",
+                              "boxSizing": "border-box"
+                            }
+                          }
                         }
-                      }
+                      ]
                     },
                     {
-                      "id": "tree_re",
-                      "type": "headline",
-                      "dataBindings": {},
+                      "id": "elite_col2_right",
+                      "type": "stack",
                       "layout": {
                         "width": "fill",
-                        "height": "fill"
+                        "height": "fill",
+                        "direction": "column",
+                        "gap": "1.2cqmin"
                       },
-                      "localProps": {
-                        "tag": "div",
-                        "text": "Real estate (29%)",
-                        "style": {
-                          "backgroundColor": "#EDE8DF",
-                          "color": "#05080F",
-                          "fontWeight": 700,
-                          "fontSize": "13px",
-                          "display": "flex",
-                          "alignItems": "center",
-                          "justifyContent": "center",
-                          "borderRadius": "8px"
-                        }
-                      }
-                    },
-                    {
-                      "id": "tree_debt",
-                      "type": "headline",
                       "dataBindings": {},
-                      "layout": {
-                        "width": "fill",
-                        "height": "fill"
-                      },
-                      "localProps": {
-                        "tag": "div",
-                        "text": "Debt (21%)",
-                        "style": {
-                          "backgroundColor": "#8A8A8A",
-                          "color": "#FFFFFF",
-                          "fontWeight": 700,
-                          "fontSize": "13px",
-                          "display": "flex",
-                          "alignItems": "center",
-                          "justifyContent": "center",
-                          "borderRadius": "8px"
+                      "children": [
+                        {
+                          "id": "tree_re",
+                          "type": "headline",
+                          "dataBindings": {},
+                          "layout": {
+                            "width": "fill",
+                            "height": "fill"
+                          },
+                          "localProps": {
+                            "tag": "div",
+                            "text": "Real estate (29%)",
+                            "style": {
+                              "background": "linear-gradient(135deg, #FFFFFF, #EAEAEA)",
+                              "color": "#111827",
+                              "fontWeight": 700,
+                              "fontSize": "1.25cqmin",
+                              "display": "flex",
+                              "alignItems": "flex-end",
+                              "justifyContent": "flex-start",
+                              "padding": "1.2cqmin 1.5cqmin",
+                              "borderRadius": "12px",
+                              "boxShadow": "0 4px 20px rgba(255,255,255,0.05)",
+                              "flex": "1.3",
+                              "boxSizing": "border-box"
+                            }
+                          }
+                        },
+                        {
+                          "id": "tree_alt",
+                          "type": "headline",
+                          "dataBindings": {},
+                          "layout": {
+                            "width": "fill",
+                            "height": "fill"
+                          },
+                          "localProps": {
+                            "tag": "div",
+                            "text": "Alternate assets (18%)",
+                            "style": {
+                              "background": "linear-gradient(135deg, #4B5563, #1F2937)",
+                              "color": "#FFFFFF",
+                              "fontWeight": 700,
+                              "fontSize": "1.25cqmin",
+                              "display": "flex",
+                              "alignItems": "flex-end",
+                              "justifyContent": "flex-start",
+                              "padding": "1.2cqmin 1.5cqmin",
+                              "borderRadius": "12px",
+                              "boxShadow": "0 4px 20px rgba(0,0,0,0.15)",
+                              "flex": "1.0",
+                              "boxSizing": "border-box"
+                            }
+                          }
                         }
-                      }
-                    },
-                    {
-                      "id": "tree_alt",
-                      "type": "headline",
-                      "dataBindings": {},
-                      "layout": {
-                        "width": "fill",
-                        "height": "fill"
-                      },
-                      "localProps": {
-                        "tag": "div",
-                        "text": "Alternate assets (18%)",
-                        "style": {
-                          "backgroundColor": "#374151",
-                          "color": "#FFFFFF",
-                          "fontWeight": 700,
-                          "fontSize": "13px",
-                          "display": "flex",
-                          "alignItems": "center",
-                          "justifyContent": "center",
-                          "borderRadius": "8px"
-                        }
-                      }
+                      ]
                     }
                   ]
                 },

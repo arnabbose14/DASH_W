@@ -775,31 +775,59 @@ export const defaultPresentation: Presentation = {
               }
             },
             {
-              "id": "mf_chart",
-              "type": "bar-chart",
-              "dataBindings": {},
+              "id": "mf_chart_stack",
+              "type": "stack",
               "layout": {
                 "width": "fill",
                 "height": "fill",
-                "padding": "16cqmin"
+                "direction": "column",
+                "gap": "1.5cqmin",
+                "alignItems": "center"
               },
-              "localProps": {
-                "data": [
-                  {
-                    "label": "HNI (Increase); MF (Reduce)",
-                    "value": -9,
-                    "highlight": false
+              "dataBindings": {},
+              "children": [
+                {
+                  "id": "mf_chart_header",
+                  "type": "headline",
+                  "dataBindings": {},
+                  "layout": {
+                    "width": "fit",
+                    "height": "fit"
                   },
-                  {
-                    "label": "MF (Increase); HNI (Reduce)",
-                    "value": 39,
-                    "highlight": true
+                  "localProps": {
+                    "tag": "div",
+                    "text": "2Y Change (%)",
+                    "className": "bse-chart-header-pill"
                   }
-                ],
-                "unit": "%",
-                "maxValue": 50,
-                "layoutType": "horizontal"
-              }
+                },
+                {
+                  "id": "mf_chart",
+                  "type": "bar-chart",
+                  "dataBindings": {},
+                  "layout": {
+                    "width": "fill",
+                    "height": "fill",
+                    "padding": "16cqmin"
+                  },
+                  "localProps": {
+                    "data": [
+                      {
+                        "label": "HNI (Increase); MF (Reduce)",
+                        "value": -9,
+                        "highlight": false
+                      },
+                      {
+                        "label": "MF (Increase); HNI (Reduce)",
+                        "value": 39,
+                        "highlight": true
+                      }
+                    ],
+                    "unit": "%",
+                    "maxValue": 50,
+                    "layoutType": "horizontal"
+                  }
+                }
+              ]
             },
             {
               "id": "mf_footer",

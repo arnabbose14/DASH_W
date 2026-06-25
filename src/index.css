@@ -1381,6 +1381,14 @@ input, textarea, select {
   color: var(--t3);
 }
 
+#bse_stats .kpi-label {
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em !important;
+  color: var(--t1) !important;
+  margin-bottom: 0.4em !important;
+}
+
 .kpi-value-container {
   display: flex;
   align-items: baseline;

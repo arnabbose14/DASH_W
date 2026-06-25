@@ -71,6 +71,7 @@ export const KPICard: React.FC<DataProps> = ({ component, variables }) => {
 
   return (
     <div
+      id={component.id}
       ref={rootRef}
       className="dash-kpi-card animate-fade-up"
       style={{ ...style, '--stagger-delay': stagger } as React.CSSProperties}

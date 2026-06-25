@@ -1725,77 +1725,150 @@ input, textarea, select {
   flex-direction: row;
   width: 100%;
   height: 100%;
-  gap: 2em;
+  gap: 1.5em;
 }
 
 .comp-panel {
   flex: 1;
-  background: rgba(12,20,32,0.65);
-  border: 1px solid var(--gold-b);
   border-radius: 14px;
-  padding: 2em 2.2em;
+  padding: 1.5em 1.8em;
   display: flex;
   flex-direction: column;
   backdrop-filter: blur(16px);
+  box-sizing: border-box;
 }
 
-.comp-panel.featured {
-  background: rgba(201,168,76,0.04);
-  border-color: var(--gold);
-  box-shadow: 0 0 30px rgba(201,168,76,0.08);
+.comp-panel.panel-left {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
 }
 
-.comp-panel-title {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: var(--font-size-body) !important;
-  font-weight: 600;
-  color: var(--t1);
-  margin-bottom: 4px;
+.comp-panel.panel-right {
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  background: rgba(212, 175, 55, 0.03);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.04);
 }
 
-.comp-panel.featured .comp-panel-title { color: var(--gold-l); }
-
-.comp-panel-subtitle {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: var(--font-size-eyebrow) !important;
-  color: var(--t3);
-  margin-bottom: 1.5em;
+/* Row 1: Profile & Quote */
+.comp-row-profile {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1em;
+  min-height: 4.5cqmin;
 }
 
-.comp-panel-value {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: calc(1.3 * var(--font-size-subheader)) !important;
-  font-weight: 700;
-  color: var(--t2);
-  line-height: 1;
-  margin-bottom: 0.8em;
+.comp-avatar {
+  flex-shrink: 0;
+  width: 2.8em;
+  height: 2.8em;
 }
 
-.comp-panel.featured .comp-panel-value { color: var(--gold-l); }
-
-.comp-value-unit {
-  font-size: 0.55em;
-  color: var(--t3);
-  font-weight: 500;
-}
-
-.comp-panel-list {
+.comp-profile-text {
   display: flex;
   flex-direction: column;
-  gap: 0.8em;
-  list-style: none;
+  gap: 0.1em;
 }
 
-.comp-list-item {
+.comp-profile-name {
   font-family: 'Inter Tight', sans-serif;
-  font-size: var(--font-size-body) !important;
+  font-size: 1.05em;
+  font-weight: 700;
+  color: var(--t1);
+}
+
+.comp-profile-name.accent {
+  color: var(--gold-l);
+}
+
+.comp-profile-quote {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.88em;
+  font-style: italic;
   color: var(--t3);
+  line-height: 1.3;
+}
+
+/* Dividers */
+.comp-divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 1.2em 0;
+  width: 100%;
+}
+
+.comp-panel.panel-right .comp-divider {
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+/* Row 2: Action & Product */
+.comp-row-middle {
   display: flex;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  min-height: 4.2cqmin;
+}
+
+.comp-middle-left {
+  flex: 1.2;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--t2);
+  line-height: 1.3;
+}
+
+.comp-middle-right {
+  flex: 0.8;
+  display: flex;
+  justify-content: flex-start;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.88em;
+  color: var(--t3);
+  line-height: 1.35;
+}
+
+/* Row 3: Callout Value at the Bottom */
+.comp-row-bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto; /* Pushes to bottom */
+  padding-top: 0.6em;
+}
+
+.comp-bottom-left {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.95em;
+  font-weight: 700;
+  color: var(--t2);
+}
+
+.comp-bottom-right {
+  display: flex;
+  align-items: center;
   gap: 0.5em;
 }
 
-.tick-item { color: var(--t2); }
+.comp-value-label {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.88em;
+  color: var(--t3);
+}
+
+.comp-value-amount {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.5em;
+  font-weight: 800;
+  color: var(--t1);
+}
+
+.comp-panel.panel-right .comp-value-amount {
+  color: var(--gold-l);
+}
 
 /* ── Donut Chart ── */
 .dash-column-wrapper {

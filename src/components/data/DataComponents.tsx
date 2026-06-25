@@ -557,15 +557,40 @@ export const LineChart: React.FC<DataProps> = ({ component, variables: _variable
 // ════════════════════════════════════════════════════════════════════════════
 // 5. Comparison Chart
 // ════════════════════════════════════════════════════════════════════════════
+const Nifty500Logo: React.FC = () => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <svg width="22" height="22" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Left curve stem of N */}
+          <path d="M25 80C25 40 45 20 60 20" stroke="#4F46E5" strokeWidth="12" strokeLinecap="round" />
+          {/* Diagonal stem */}
+          <path d="M35 80L65 20" stroke="#818CF8" strokeWidth="12" strokeLinecap="round" />
+          {/* Right curve stem of N */}
+          <path d="M75 20C75 60 55 80 40 80" stroke="#EF4444" strokeWidth="12" strokeLinecap="round" />
+        </svg>
+        <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 800, fontSize: '15px', letterSpacing: '-0.3px' }}>
+          <span style={{ color: '#E2E8F0' }}>Nifty</span>
+          <span style={{ color: '#EF4444' }}>500</span>
+        </span>
+      </div>
+      <div style={{ display: 'flex', width: '70px', height: '3px', marginTop: '3px', borderRadius: '1.5px', overflow: 'hidden' }}>
+        <div style={{ flex: 1, backgroundColor: '#4F46E5' }} />
+        <div style={{ flex: 1, backgroundColor: '#F59E0B' }} />
+        <div style={{ flex: 1, backgroundColor: '#EF4444' }} />
+        <div style={{ flex: 1, backgroundColor: '#10B981' }} />
+      </div>
+    </div>
+  );
+};
+
 export const ComparisonChart: React.FC<DataProps> = ({ component, variables }) => {
-  const leftTitle    = resolveProp('leftTitle',    component.dataBindings, variables, component.localProps) || 'Current State';
-  const leftSubtitle = resolveProp('leftSubtitle', component.dataBindings, variables, component.localProps) || '';
+  const leftTitle    = resolveProp('leftTitle',    component.dataBindings, variables, component.localProps) || 'Your friend';
   const leftValue    = resolveProp('leftValue',    component.dataBindings, variables, component.localProps) || '';
   const leftUnit     = resolveProp('leftUnit',     component.dataBindings, variables, component.localProps) || '';
   const leftList     = component.localProps?.leftList || [];
 
-  const rightTitle    = resolveProp('rightTitle',    component.dataBindings, variables, component.localProps) || 'Proposed State';
-  const rightSubtitle = resolveProp('rightSubtitle', component.dataBindings, variables, component.localProps) || '';
+  const rightTitle    = resolveProp('rightTitle',    component.dataBindings, variables, component.localProps) || 'You';
   const rightValue    = resolveProp('rightValue',    component.dataBindings, variables, component.localProps) || '';
   const rightUnit     = resolveProp('rightUnit',     component.dataBindings, variables, component.localProps) || '';
   const rightList     = component.localProps?.rightList || [];
@@ -578,43 +603,109 @@ export const ComparisonChart: React.FC<DataProps> = ({ component, variables }) =
 
   return (
     <div ref={rootRef} className="dash-comparison-chart" style={{ ...style, '--chart-stagger': stagger } as React.CSSProperties}>
+      {/* Left Panel - Your Friend */}
       <div className="comp-panel panel-left animate-fade-up" style={{ '--stagger-delay': `calc(var(--chart-stagger, ${stagger}) + 0)` } as React.CSSProperties}>
-        <h3 className="comp-panel-title">{leftTitle}</h3>
-        {leftSubtitle && <p className="comp-panel-subtitle">{leftSubtitle}</p>}
-        {leftValue && (
-          <div className="comp-panel-value">
-            <OdometerNumber
-              value={`${leftValue}${leftUnit}`}
-              isPlaying={isPlaying}
-              duration={1.5}
-              baseDelay={stagger * 0.1}
-            />
+        {/* Row 1: Profile & Quote */}
+        <div className="comp-row-profile">
+          <svg viewBox="0 0 32 32" className="comp-avatar">
+            <defs>
+              <linearGradient id="avatarLeftGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#E0E0E0" />
+                <stop offset="100%" stopColor="#7E7E7E" />
+              </linearGradient>
+            </defs>
+            <path d="M16 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 14c-5.33 0-16 2.67-16 8v2h32v-2c0-5.33-10.67-8-16-8z" fill="url(#avatarLeftGrad)" />
+          </svg>
+          <div className="comp-profile-text">
+            <span className="comp-profile-name">{leftTitle}:</span>
+            <span className="comp-profile-quote">"{leftList[0] || ''}"</span>
           </div>
-        )}
-        <ul className="comp-panel-list">
-          {leftList.map((item: string, index: number) => (
-            <li key={index} className="comp-list-item">✕ {item}</li>
-          ))}
-        </ul>
+        </div>
+
+        <hr className="comp-divider" />
+
+        {/* Row 2: Action & Product */}
+        <div className="comp-row-middle">
+          <div className="comp-middle-left">
+            Your friend buys Equity Index ETF (a.k.a Benchmark)
+          </div>
+          <div className="comp-middle-right">
+            <Nifty500Logo />
+          </div>
+        </div>
+
+        <hr className="comp-divider" />
+
+        {/* Row 3: Callout Value at the Bottom */}
+        <div className="comp-row-bottom">
+          <div className="comp-bottom-left">5Y Later:</div>
+          <div className="comp-bottom-right">
+            <span className="comp-value-label">Current Value:</span>
+            <span className="comp-value-amount">
+              {leftValue && (
+                <OdometerNumber
+                  value={`${leftValue}${leftUnit}`}
+                  isPlaying={isPlaying}
+                  duration={1.5}
+                  baseDelay={stagger * 0.1}
+                />
+              )}
+            </span>
+          </div>
+        </div>
       </div>
-      <div className="comp-panel panel-right animate-fade-up" style={{ '--stagger-delay': `calc(var(--chart-stagger, ${stagger}) + 1.5)` } as React.CSSProperties}>
-        <h3 className="comp-panel-title">{rightTitle}</h3>
-        {rightSubtitle && <p className="comp-panel-subtitle">{rightSubtitle}</p>}
-        {rightValue && (
-          <div className="comp-panel-value accent-text">
-            <OdometerNumber
-              value={`${rightValue}${rightUnit}`}
-              isPlaying={isPlaying}
-              duration={1.5}
-              baseDelay={stagger * 0.1 + 0.15}
-            />
+
+      {/* Right Panel - You */}
+      <div className="comp-panel panel-right animate-fade-up" style={{ '--stagger-delay': `calc(var(--chart-stagger, ${stagger}) + 0.3)` } as React.CSSProperties}>
+        {/* Row 1: Profile & Quote */}
+        <div className="comp-row-profile">
+          <svg viewBox="0 0 32 32" className="comp-avatar">
+            <defs>
+              <linearGradient id="avatarRightGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#F9F5E8" />
+                <stop offset="50%" stopColor="#D4AF37" />
+                <stop offset="100%" stopColor="#8A6F27" />
+              </linearGradient>
+            </defs>
+            <path d="M16 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 14c-5.33 0-16 2.67-16 8v2h32v-2c0-5.33-10.67-8-16-8z" fill="url(#avatarRightGrad)" />
+          </svg>
+          <div className="comp-profile-text">
+            <span className="comp-profile-name accent">{rightTitle}:</span>
+            <span className="comp-profile-quote">"{rightList[0] || ''}"</span>
           </div>
-        )}
-        <ul className="comp-panel-list">
-          {rightList.map((item: string, index: number) => (
-            <li key={index} className="comp-list-item tick-item">✓ {item}</li>
-          ))}
-        </ul>
+        </div>
+
+        <hr className="comp-divider" />
+
+        {/* Row 2: Action & Product */}
+        <div className="comp-row-middle">
+          <div className="comp-middle-left">
+            You create an actively managed portfolio
+          </div>
+          <div className="comp-middle-right">
+            {rightList[1] || ''}
+          </div>
+        </div>
+
+        <hr className="comp-divider" />
+
+        {/* Row 3: Callout Value at the Bottom */}
+        <div className="comp-row-bottom">
+          <div className="comp-bottom-left">5Y Later:</div>
+          <div className="comp-bottom-right">
+            <span className="comp-value-label">Current Value:</span>
+            <span className="comp-value-amount">
+              {rightValue && (
+                <OdometerNumber
+                  value={`${rightValue}${rightUnit}`}
+                  isPlaying={isPlaying}
+                  duration={1.5}
+                  baseDelay={stagger * 0.1 + 0.15}
+                />
+              )}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );

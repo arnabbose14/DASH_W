@@ -2894,6 +2894,7 @@ export const defaultPresentation: Presentation = {
             "height": "fill",
             "direction": "column",
             "justifyContent": "between",
+            "alignItems": "center",
             "gap": "3cqmin",
             "padding": "5cqmin"
           },
@@ -2911,6 +2912,20 @@ export const defaultPresentation: Presentation = {
                 "tag": "h2",
                 "text": "Case-in-point: Private Credit Fund; Delivered IRR",
                 "className": "slide-heading"
+              }
+            },
+            {
+              "id": "pc_pill",
+              "type": "headline",
+              "dataBindings": {},
+              "layout": {
+                "width": "fit",
+                "height": "fit"
+              },
+              "localProps": {
+                "tag": "div",
+                "text": "Select Private Credit AIF (IRR)",
+                "className": "bse-chart-header-pill"
               }
             },
             {
@@ -2953,7 +2968,7 @@ export const defaultPresentation: Presentation = {
                 "height": "fit"
               },
               "localProps": {
-                "text": "(Source: AMC Disclosures, W Research | Select Private Credit AIF)",
+                "text": "(Source: AMC Disclosures, W Research)",
                 "className": "slide-paragraph"
               }
             }

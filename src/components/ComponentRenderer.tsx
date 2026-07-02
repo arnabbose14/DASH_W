@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import type { ComponentDefinition } from '../types';
 import { Hero, Headline, Paragraph, Quote, SectionDivider } from './content/ContentComponents';
 import { KPICard, BarChart, DonutChart, LineChart, ComparisonChart, Timeline, DispersionChart, ScatterPlot, GroupedBarChart, VennDiagram } from './data/DataComponents';
 import { ImageComp, VideoComp, LogoStrip } from './media/MediaComponents';
-import { Stack, Grid, Columns, Container } from './layout/LayoutWrapper';
+import { Stack, Grid, Columns, Container, LayoutContext } from './layout/LayoutWrapper';
 
 type Updater = (c: ComponentDefinition) => ComponentDefinition;
 type UpdateFn = (id: string, updater: Updater) => void;
@@ -137,6 +137,8 @@ export const ComponentRenderer: React.FC<RendererProps> = ({
   if (!content) return null;
 
   if (isEditor) {
+    const layoutCtx = useContext(LayoutContext);
+    const parentAlignItems = layoutCtx.alignItems;
     const isSelected = selectedComponentId === component.id;
     const isAbsolute = component.layout.position === 'absolute';
     // isInteracting / setIsInteracting are declared at the top of the component.
@@ -354,17 +356,30 @@ export const ComponentRenderer: React.FC<RendererProps> = ({
           height: component.layout.height,
           cursor: isSelected ? 'grab' : 'pointer',
           zIndex,
+          maxWidth: component.layout.maxWidth,
+          minWidth: component.layout.minWidth,
+          maxHeight: component.layout.maxHeight,
+          minHeight: component.layout.minHeight,
+          aspectRatio: component.layout.aspectRatio,
         }
       : {
           position:      'relative',      // ← anchors resize handles correctly
           display:       'flex',
           flexDirection: 'column',
+          alignItems:    parentAlignItems === 'center' ? 'center' :
+                         parentAlignItems === 'end' ? 'flex-end' :
+                         parentAlignItems === 'stretch' ? 'stretch' : 'flex-start',
           flexGrow:      component.layout.height === 'fill' ? 1 : undefined,
           width:  component.layout.width  === 'fill' ? '100%' : component.layout.width  === 'fit' ? 'fit-content' : component.layout.width,
           height: component.layout.height === 'fill' ? '100%' : component.layout.height === 'fit' ? 'fit-content' : component.layout.height,
           alignSelf: component.layout.width === 'fill' ? 'stretch' : undefined,
           cursor: isSelected ? 'grab' : 'pointer',
           zIndex,
+          maxWidth: component.layout.maxWidth,
+          minWidth: component.layout.minWidth,
+          maxHeight: component.layout.maxHeight,
+          minHeight: component.layout.minHeight,
+          aspectRatio: component.layout.aspectRatio,
         };
 
     return (

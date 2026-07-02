@@ -1,5 +1,11 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import type { LayoutConstraints } from '../../types';
+
+export const LayoutContext = createContext<{
+  direction: 'row' | 'column';
+  alignItems: 'start' | 'center' | 'end' | 'stretch';
+}>({ direction: 'column', alignItems: 'start' });
+
 
 export const getLayoutStyles = (layout: LayoutConstraints): React.CSSProperties => {
   const styles: React.CSSProperties = {};
@@ -81,9 +87,11 @@ export const Stack: React.FC<LayoutProps> = ({ layout, children, className = '',
   };
 
   return (
-    <div id={id} className={`dash-stack ${className}`} style={stackStyle} onClick={onClick}>
-      {children}
-    </div>
+    <LayoutContext.Provider value={{ direction, alignItems: layout.alignItems || 'start' }}>
+      <div id={id} className={`dash-stack ${className}`} style={stackStyle} onClick={onClick}>
+        {children}
+      </div>
+    </LayoutContext.Provider>
   );
 };
 
@@ -124,29 +132,31 @@ export const Columns: React.FC<ColumnsProps> = ({ layout, children, widths, clas
   const parentAlign = layout.alignItems || 'stretch';
 
   return (
-    <div id={id} className={`dash-columns ${className}`} style={columnsStyle} onClick={onClick}>
-      {childrenArray.map((child, index) => {
-        const colWidth = widths && widths[index] ? widths[index] : '1fr';
-        const justifyContent = parentAlign === 'center' ? 'center' :
-                               parentAlign === 'end' || (parentAlign as string) === 'flex-end' ? 'flex-end' :
-                               parentAlign === 'start' || (parentAlign as string) === 'flex-start' ? 'flex-start' :
-                               undefined;
+    <LayoutContext.Provider value={{ direction: 'row', alignItems: layout.alignItems || 'stretch' }}>
+      <div id={id} className={`dash-columns ${className}`} style={columnsStyle} onClick={onClick}>
+        {childrenArray.map((child, index) => {
+          const colWidth = widths && widths[index] ? widths[index] : '1fr';
+          const justifyContent = parentAlign === 'center' ? 'center' :
+                                 parentAlign === 'end' || (parentAlign as string) === 'flex-end' ? 'flex-end' :
+                                 parentAlign === 'start' || (parentAlign as string) === 'flex-start' ? 'flex-start' :
+                                 undefined;
 
-        const colStyle: React.CSSProperties = {
-          flex: colWidth === '1fr' ? '1 1 0%' : `0 0 ${colWidth}`,
-          width: colWidth === '1fr' ? undefined : colWidth,
-          display: 'flex',
-          flexDirection: 'column',
-          alignSelf: 'stretch',
-          justifyContent,
-        };
-        return (
-          <div key={index} className="dash-column-wrapper" style={colStyle}>
-            {child}
-          </div>
-        );
-      })}
-    </div>
+          const colStyle: React.CSSProperties = {
+            flex: colWidth === '1fr' ? '1 1 0%' : `0 0 ${colWidth}`,
+            width: colWidth === '1fr' ? undefined : colWidth,
+            display: 'flex',
+            flexDirection: 'column',
+            alignSelf: 'stretch',
+            justifyContent,
+          };
+          return (
+            <div key={index} className="dash-column-wrapper" style={colStyle}>
+              {child}
+            </div>
+          );
+        })}
+      </div>
+    </LayoutContext.Provider>
   );
 };
 
@@ -161,9 +171,11 @@ export const Container: React.FC<LayoutProps> = ({ layout, children, className =
   };
 
   return (
-    <div id={id} className={`dash-container ${className}`} style={containerStyle} onClick={onClick}>
-      {children}
-    </div>
+    <LayoutContext.Provider value={{ direction: 'column', alignItems: layout.alignItems || 'center' }}>
+      <div id={id} className={`dash-container ${className}`} style={containerStyle} onClick={onClick}>
+        {children}
+      </div>
+    </LayoutContext.Provider>
   );
 };
 

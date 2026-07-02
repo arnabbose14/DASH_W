@@ -44,6 +44,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [animKey, setAnimKey] = useState(0);
   const [selectedComponentId, setSelectedComponentId] = useState<string | null>(null);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [showExportModal, setShowExportModal] = useState(false);
   // Toast state — replaces alert()
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
@@ -71,12 +72,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(presentation),
       });
+      const contentType = response.headers.get('content-type') || '';
+      if (!response.ok || contentType.includes('text/html')) {
+        throw new Error('Static build: Server filesystem is read-only');
+      }
       const result = await response.json();
       result.success
         ? showToast('Saved to defaultPresentation.ts')
         : showToast(`Save failed: ${result.error}`, 'error');
     } catch (err: any) {
-      showToast(`Network error: ${err.message}`, 'error');
+      console.warn('Redirecting to export modal:', err.message);
+      setShowExportModal(true);
     } finally {
       setIsSaving(false);
     }
@@ -678,6 +684,80 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               >
                 <RotateCcw size={14} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'middle' }} />
                 Yes, Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Export Presentation Modal ── */}
+      {showExportModal && (
+        <div
+          className="confirm-modal-backdrop"
+          onClick={(e) => { if (e.target === e.currentTarget) setShowExportModal(false); }}
+        >
+          <div className="confirm-modal" style={{ borderColor: 'rgba(201, 168, 76, 0.38)', maxWidth: '520px' }}>
+            <div className="confirm-modal-icon" style={{ color: 'var(--gold)', borderColor: 'rgba(201, 168, 76, 0.2)', background: 'rgba(201, 168, 76, 0.05)' }}>
+              <Save size={24} />
+            </div>
+            <h2 className="confirm-modal-title">Export Presentation Data</h2>
+            <p className="confirm-modal-msg" style={{ color: 'var(--t2)', marginBottom: '20px' }}>
+              You are running the presentation on a static deployment (like Netlify) where changes cannot be saved directly to the server's files.
+              <br/><br/>
+              However, your changes have been <strong>automatically saved in your browser's local memory</strong> (so they will persist if you reload this tab).
+              <br/><br/>
+              To permanently save these edits to your source code, download the file below and replace <code>src/data/defaultPresentation.ts</code> in your local project directory.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', marginBottom: '20px' }}>
+              <button
+                className="btn-present"
+                style={{ width: '100%', padding: '12px', justifyContent: 'center' }}
+                onClick={() => {
+                  const fileContent = `import type { Presentation } from '../types';\n\nexport const defaultPresentation: Presentation = ${JSON.stringify(presentation, null, 2)};\n`;
+                  const blob = new Blob([fileContent], { type: 'text/typescript;charset=utf-8;' });
+                  const url = URL.createObjectURL(blob);
+                  const link = document.createElement('a');
+                  link.href = url;
+                  link.setAttribute('download', 'defaultPresentation.ts');
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                  showToast('Downloaded defaultPresentation.ts');
+                }}
+              >
+                <Save size={16} style={{ marginRight: '8px' }} />
+                Download defaultPresentation.ts
+              </button>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  className="btn-action"
+                  style={{ flex: 1, padding: '10px', justifyContent: 'center' }}
+                  onClick={() => {
+                    const fileContent = `import type { Presentation } from '../types';\n\nexport const defaultPresentation: Presentation = ${JSON.stringify(presentation, null, 2)};\n`;
+                    navigator.clipboard.writeText(fileContent);
+                    showToast('Copied code to clipboard');
+                  }}
+                >
+                  Copy TS Code
+                </button>
+                <button
+                  className="btn-action"
+                  style={{ flex: 1, padding: '10px', justifyContent: 'center' }}
+                  onClick={() => {
+                    navigator.clipboard.writeText(JSON.stringify(presentation, null, 2));
+                    showToast('Copied raw JSON to clipboard');
+                  }}
+                >
+                  Copy Raw JSON
+                </button>
+              </div>
+            </div>
+            <div className="confirm-modal-actions" style={{ justifyContent: 'flex-end' }}>
+              <button
+                className="btn-confirm-cancel"
+                onClick={() => setShowExportModal(false)}
+              >
+                Close
               </button>
             </div>
           </div>

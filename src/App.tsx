@@ -7,7 +7,17 @@ import { VENUE_PROFILES, type VenueProfile, type Presentation } from './types';
 const HISTORY_LIMIT = 50;
 
 function App() {
-  const [presentation, setPresentation] = useState<Presentation>(defaultPresentation);
+  const [presentation, setPresentation] = useState<Presentation>(() => {
+    try {
+      const saved = localStorage.getItem('dash_presentation');
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch (e) {
+      console.error('Failed to load presentation from localStorage', e);
+    }
+    return defaultPresentation;
+  });
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [activeVenue, setActiveVenue] = useState<VenueProfile>(VENUE_PROFILES['16_9']);
   const [showSafeAreas, setShowSafeAreas] = useState(false);
@@ -18,6 +28,14 @@ function App() {
   const futureRef = useRef<Presentation[]>([]);
   // Track stack sizes as state so header buttons update reactively
   const [historySize, setHistorySize] = useState({ past: 0, future: 0 });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('dash_presentation', JSON.stringify(presentation));
+    } catch (e) {
+      console.error('Failed to save presentation to localStorage', e);
+    }
+  }, [presentation]);
 
   const refreshHistorySizes = () =>
     setHistorySize({ past: pastRef.current.length, future: futureRef.current.length });
@@ -58,6 +76,11 @@ function App() {
   const handleReset = useCallback(() => {
     pastRef.current = [];
     futureRef.current = [];
+    try {
+      localStorage.removeItem('dash_presentation');
+    } catch (e) {
+      console.error(e);
+    }
     setPresentation(defaultPresentation);
     setActiveSlideIndex(0);
     refreshHistorySizes();

@@ -1839,7 +1839,7 @@ export const defaultPresentation: Presentation = {
                           "localProps": {
                             "tag": "div",
                             "text": "Equity (32%)",
-                            "stagger": 3.0,
+                            "stagger": 3,
                             "style": {
                               "background": "linear-gradient(135deg, #ECC45C, #C9A84C)",
                               "color": "#FFFFFF",
@@ -1867,7 +1867,7 @@ export const defaultPresentation: Presentation = {
                           "localProps": {
                             "tag": "div",
                             "text": "Debt (21%)",
-                            "stagger": 4.0,
+                            "stagger": 4,
                             "style": {
                               "background": "linear-gradient(135deg, #A8A8A8, #7D7D7D)",
                               "color": "#FFFFFF",
@@ -2707,18 +2707,34 @@ export const defaultPresentation: Presentation = {
                           "localProps": {
                             "legendAlign": "center",
                             "legend": [
-                              { "label": "Small-cap PMS (Select)", "color": "linear-gradient(to top, var(--gold-dim), var(--gold-l))" },
-                              { "label": "Top Smallcap MF 250", "color": "linear-gradient(to top, #4B5563, #6B7280)" },
-                              { "label": "NIFTY Smallcap", "color": "linear-gradient(to top, #00A8B5, #00E5FF)" }
+                              {
+                                "label": "Small-cap PMS (Select)",
+                                "color": "linear-gradient(to top, var(--gold-dim), var(--gold-l))"
+                              },
+                              {
+                                "label": "Top Smallcap MF 250",
+                                "color": "linear-gradient(to top, #4B5563, #6B7280)"
+                              },
+                              {
+                                "label": "NIFTY Smallcap",
+                                "color": "linear-gradient(to top, #00A8B5, #00E5FF)"
+                              }
                             ],
                             "groups": [
                               {
                                 "label": "Returns 1 Yr",
-                                "values": [62, 3]
+                                "values": [
+                                  62,
+                                  3
+                                ]
                               },
                               {
                                 "label": "Returns 3 Yr",
-                                "values": [53, 31, 20]
+                                "values": [
+                                  53,
+                                  31,
+                                  20
+                                ]
                               }
                             ],
                             "maxValue": 70,
@@ -3762,9 +3778,12 @@ export const defaultPresentation: Presentation = {
               "type": "paragraph",
               "dataBindings": {},
               "layout": {
-                "width": "fill",
-                "height": "fit",
-                "maxWidth": "70%"
+                "width": "63.01%",
+                "height": "3.35%",
+                "maxWidth": "70%",
+                "position": "absolute",
+                "left": "18%",
+                "top": "61%"
               },
               "localProps": {
                 "text": "Three factors influence probability and extent of alpha",

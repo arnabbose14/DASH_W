@@ -6,8 +6,7 @@ export const getLayoutStyles = (layout: LayoutConstraints): React.CSSProperties 
 
   // Width mapping
   if (layout.width === 'fill') {
-    styles.flexGrow = 1;
-    styles.flexBasis = '0%';
+    styles.width = '100%';
     styles.alignSelf = 'stretch';
   } else if (layout.width === 'fit') {
     styles.width = 'fit-content';

@@ -51,7 +51,7 @@ export const defaultPresentation: Presentation = {
             "height": "fill",
             "direction": "column",
             "justifyContent": "center",
-            "alignItems": "start",
+            "alignItems": "center",
             "gap": "2cqmin",
             "padding": "8cqmin"
           },

@@ -359,7 +359,7 @@ export const ComponentRenderer: React.FC<RendererProps> = ({
           position:      'relative',      // ← anchors resize handles correctly
           display:       'flex',
           flexDirection: 'column',
-          flexGrow:      (component.layout.width === 'fill' || component.layout.height === 'fill') ? 1 : undefined,
+          flexGrow:      component.layout.height === 'fill' ? 1 : undefined,
           width:  component.layout.width  === 'fill' ? '100%' : component.layout.width  === 'fit' ? 'fit-content' : component.layout.width,
           height: component.layout.height === 'fill' ? '100%' : component.layout.height === 'fit' ? 'fit-content' : component.layout.height,
           alignSelf: component.layout.width === 'fill' ? 'stretch' : undefined,
